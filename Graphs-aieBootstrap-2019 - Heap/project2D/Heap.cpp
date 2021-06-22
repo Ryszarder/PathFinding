@@ -126,3 +126,4 @@ int Heap::GetChild2Index(int nIndex)
 	//Out of range
 	return nIndex;
 }
+

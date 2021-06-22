@@ -20,3 +20,4 @@ struct GraphNode
 	bool m_bBlocked;
 }; 
 
+

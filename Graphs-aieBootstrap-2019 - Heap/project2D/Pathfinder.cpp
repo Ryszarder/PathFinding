@@ -233,3 +233,4 @@ void Pathfinder::Render(aie::Renderer2D* pRenderer)
 	//Reset colour back to default
 	pRenderer->SetRenderColour(1.0f, 1.0f, 1.0f); //White
 }
+

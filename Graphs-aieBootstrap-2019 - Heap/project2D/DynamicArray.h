@@ -117,3 +117,4 @@ private:
 	int m_nCapicity;
 	int m_nUsed;
 };
+

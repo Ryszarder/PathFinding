@@ -25,3 +25,4 @@ private:
 	bool m_bClosedList[GRID_SIZE][GRID_SIZE];
 };
 
+
