@@ -63,7 +63,7 @@ GraphNode* Heap::Pop()
 		int nChild2Index = GetChild2Index(nCurrentIndex);
 
 		//Find smallest child
-		int nSmallestIndex = nChild1Index;
+		nSmallestIndex = nChild1Index;
 		if (m_Data[nChild2Index]->m_nFscore < m_Data[nSmallestIndex]->m_nFscore)
 			nSmallestIndex = nChild2Index;
 	}

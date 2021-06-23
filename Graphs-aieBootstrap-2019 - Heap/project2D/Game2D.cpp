@@ -104,7 +104,7 @@ void Game2D::Draw()
 
 	std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
-	Vector2 end = { 800, 800 };
+	Vector2 end = { 800, 60 };
 	//Vector2 end = { 800, 60 };
 	m_pPathfinder->AStarPath(start, end, path);
 

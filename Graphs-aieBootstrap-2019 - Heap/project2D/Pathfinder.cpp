@@ -24,8 +24,8 @@ Pathfinder::Pathfinder()
 
 			m_pNodes[x][y]->m_bBlocked = false;
 
-			if (x == 20 && y != 20)
-				m_pNodes[x][y]->m_bBlocked = true;
+			/*if (x == 20 && y != 20)
+				m_pNodes[x][y]->m_bBlocked = true;*/
 		}
 	}
 
