@@ -61,7 +61,7 @@ void Game2D::Update(float deltaTime)
 
 	if (input->WasMouseButtonPressed(0))
 	{
-		Vector2 mousePos = { input->GetMouseX() + 10, input->GetMouseY() + 10 };
+		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
 		if (pNode)
@@ -69,12 +69,12 @@ void Game2D::Update(float deltaTime)
 			pNode->m_bBlocked = true;
 		}
 
-		m_pPathfinder->AStarPath(start, end, path);
+		//Draw();
 	}
 
 	if (input->WasMouseButtonPressed(1))
 	{
-		Vector2 mousePos = { input->GetMouseX() + 10, input->GetMouseY() + 10 };
+		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
 		if (pNode)
@@ -82,7 +82,7 @@ void Game2D::Update(float deltaTime)
 			pNode->m_bBlocked = false;
 		}
 
-		m_pPathfinder->AStarPath(start, end, path);
+		//Draw();
 	}
 }
 

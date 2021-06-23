@@ -1,7 +1,7 @@
 #include "Pathfinder.h"
 
 #define NODE_SIZE 20
-#define NODE_DRAW_SIZE 15
+#define NODE_DRAW_SIZE 19
 
 Pathfinder::Pathfinder()
 {
@@ -339,7 +339,8 @@ void Pathfinder::Render(aie::Renderer2D* pRenderer)
 			else
 				pRenderer->SetRenderColour(0.0f, 0.8f, 0.0f, 0.7f); //Green
 
-			pRenderer->DrawBox(pNode->m_v2Position.x, pNode->m_v2Position.y, NODE_SIZE / 2, NODE_SIZE / 2);
+			pRenderer->DrawBox(pNode->m_v2Position.x, pNode->m_v2Position.y, NODE_DRAW_SIZE, NODE_DRAW_SIZE);
+			//pRenderer->DrawBox(pNode->m_v2Position.x, pNode->m_v2Position.y, NODE_SIZE / 2, NODE_SIZE / 2);
 		}
 	}
 
