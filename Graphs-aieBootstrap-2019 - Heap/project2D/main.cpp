@@ -11,7 +11,7 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	// Create the Application.
-	Game2D* game = new Game2D("AIE", 1000, 720, false);
+	Game2D* game = new Game2D("AIE", 1100, 900, false);
 							//("AIE", 1280, 720, false)
 	// Run the game loop.
 	game->Run();

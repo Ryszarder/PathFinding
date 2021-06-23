@@ -15,7 +15,7 @@ void Heap::Push(GraphNode* nValue)
 	int nParentIndex = GetParentIndex(nCurrentIndex);
 
 	//Chech if child is less than parent
-	while (m_Data[nCurrentIndex]->m_nGscore < m_Data[nParentIndex]->m_nGscore)
+	while (m_Data[nCurrentIndex]->m_nFscore < m_Data[nParentIndex]->m_nFscore)
 	{
 		//Swap
 		GraphNode* temp = m_Data[nCurrentIndex];
@@ -46,11 +46,11 @@ GraphNode* Heap::Pop()
 
 	//Find smallest child
 	int nSmallestIndex = nChild1Index;
-	if (m_Data[nChild2Index]->m_nGscore < m_Data[nSmallestIndex]->m_nGscore)
+	if (m_Data[nChild2Index]->m_nFscore < m_Data[nSmallestIndex]->m_nFscore)
 		nSmallestIndex = nChild2Index;
 
 	//Chech if smallest child is less than parent
-	while (m_Data[nSmallestIndex]->m_nGscore < m_Data[nCurrentIndex]->m_nGscore)
+	while (m_Data[nSmallestIndex]->m_nFscore < m_Data[nCurrentIndex]->m_nFscore)
 	{
 		//Swap nodes
 		GraphNode* temp = m_Data[nSmallestIndex];
@@ -64,7 +64,7 @@ GraphNode* Heap::Pop()
 
 		//Find smallest child
 		int nSmallestIndex = nChild1Index;
-		if (m_Data[nChild2Index]->m_nGscore < m_Data[nSmallestIndex]->m_nGscore)
+		if (m_Data[nChild2Index]->m_nFscore < m_Data[nSmallestIndex]->m_nFscore)
 			nSmallestIndex = nChild2Index;
 	}
 

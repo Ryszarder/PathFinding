@@ -58,6 +58,32 @@ void Game2D::Update(float deltaTime)
 		aie::Application* application = aie::Application::GetInstance();
 		application->Quit();
 	}
+
+	if (input->WasMouseButtonPressed(0))
+	{
+		Vector2 mousePos = { input->GetMouseX() + 10, input->GetMouseY() + 10 };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+
+		if (pNode)
+		{
+			pNode->m_bBlocked = true;
+		}
+
+		m_pPathfinder->AStarPath(start, end, path);
+	}
+
+	if (input->WasMouseButtonPressed(1))
+	{
+		Vector2 mousePos = { input->GetMouseX() + 10, input->GetMouseY() + 10 };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+
+		if (pNode)
+		{
+			pNode->m_bBlocked = false;
+		}
+
+		m_pPathfinder->AStarPath(start, end, path);
+	}
 }
 
 void Game2D::Draw()
@@ -78,8 +104,9 @@ void Game2D::Draw()
 
 	std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
-	Vector2 end = { 800, 60 };
-	m_pPathfinder->DijkstrasPath(start, end, path);
+	Vector2 end = { 800, 800 };
+	//Vector2 end = { 800, 60 };
+	m_pPathfinder->AStarPath(start, end, path);
 
 	for (int i = 0; i < path.size(); ++i)
 	{

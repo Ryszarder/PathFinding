@@ -13,12 +13,16 @@ public:
 	~Pathfinder();
 
 	bool DijkstrasPath(Vector2 v2Start, Vector2 v2End, std::vector<Vector2>& finalPath);
+	bool AStarPath(Vector2 v2Start, Vector2 v2End, std::vector<Vector2>& finalPath);
+
 	GraphNode* GetNodeByPos(Vector2 v2Pos);
 
 	void Render(aie::Renderer2D* pRenderer);
 
 private:
 	GraphNode* GetNeighbour(int nCurrentX, int nCurrentY, int nNeighbour);
+
+	int GetHueristic(GraphNode* pNeighbour, GraphNode* pEnd);
 
 	GraphNode* m_pNodes[GRID_SIZE][GRID_SIZE];
 	Heap m_OpenList;
