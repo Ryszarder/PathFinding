@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer2D.h"
 #include "Texture.h"
+#include "Pathfinder.h"
 
 class Agent
 {
@@ -20,10 +21,13 @@ public:
 
 private:
 	aie::Texture* m_texture;
+	aie::Renderer2D* m_2dRenderer;
 
 	State state = State::STATE_IDLE;
 
 	float m_posX;
 	float m_posY;
+
+	Pathfinder* m_pPathfinder;
 };
 

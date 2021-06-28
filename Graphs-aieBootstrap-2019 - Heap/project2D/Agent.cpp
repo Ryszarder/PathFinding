@@ -5,8 +5,11 @@ Agent::Agent()
 {
 	m_texture = new aie::Texture("../bin/textures/Dice.png");
 
-	m_posX = 60;
-	m_posY = 60;
+	m_posX = 300;
+	m_posY = 600; 
+	
+	m_pPathfinder = new Pathfinder();
+	m_2dRenderer = new aie::Renderer2D();
 }
 
 Agent::~Agent()
@@ -14,8 +17,6 @@ Agent::~Agent()
 	delete m_texture;
 	m_texture = nullptr;
 }
-
-
 
 void Agent::Update(float deltaTime)
 {
@@ -29,8 +30,9 @@ void Agent::Update(float deltaTime)
 			state = State::STATE_PROTOL;
 		}
 
-		else if (input->IsKeyDown(aie::INPUT_KEY_D))
+		else if (input->WasKeyPressed(aie::INPUT_KEY_D))
 		{
+			state = State::STATE_FOLLOW;
 		}
 
 		break;
@@ -40,14 +42,17 @@ void Agent::Update(float deltaTime)
 		{
 			m_texture->Unload();
 			m_texture = new aie::Texture("../bin/textures/ship.png");
-			state = State::STATE_FOLLOW;
+			state = State::STATE_IDLE;
 		}
 		break;
 
 	case STATE_FOLLOW:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
-			m_posX += 500.0f * deltaTime;
+			std::vector<Vector2> path;
+			Vector2 start = { 300, 600 };
+			Vector2 end = { 700, 80 };
+			m_pPathfinder->AStarPath(start, end, path);
 			state = State::STATE_PROTOL;
 		}
 		break;
@@ -58,3 +63,4 @@ void Agent::Draw(aie::Renderer2D* renderer)
 {
 	renderer->DrawSprite(m_texture, m_posX, m_posY, 32, 32);
 }
+
