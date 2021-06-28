@@ -6,6 +6,8 @@
 
 class Player;
 
+class Agent;
+
 class Game2D : public aie::Game
 {
 public:
@@ -22,4 +24,5 @@ protected:
 	aie::Font*	m_font;
 
 	Pathfinder* m_pPathfinder;
+	Agent* m_nAgent;
 };
