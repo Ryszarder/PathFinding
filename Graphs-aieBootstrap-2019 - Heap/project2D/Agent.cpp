@@ -15,35 +15,30 @@ Agent::~Agent()
 	m_texture = nullptr;
 }
 
-enum State
-{
-	STATE_IDLE,
-	STATE_PROTOL,
-	STATE_FOLLOW
-};
+
 
 void Agent::Update(float deltaTime)
 {
 	aie::Input* input = aie::Input::GetInstance();
 
-	switch (i)
+	switch (state)
 	{
 	case STATE_IDLE:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
-			i = 1;
+			state = State::STATE_PROTOL;
 		}
 
-		/*else if (input->IsKeyDown(aie::INPUT_KEY_D))
+		else if (input->IsKeyDown(aie::INPUT_KEY_D))
 		{
-		}*/
+		}
 
 		break;
 
 	case STATE_PROTOL:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
-			i = 2;
+			state = State::STATE_FOLLOW;
 		}
 		break;
 
@@ -51,7 +46,7 @@ void Agent::Update(float deltaTime)
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
 			m_posX += 500.0f * deltaTime;
-			i = 1;
+			state = State::STATE_PROTOL;
 		}
 		break;
 	}
