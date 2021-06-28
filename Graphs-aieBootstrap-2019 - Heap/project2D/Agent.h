@@ -14,6 +14,8 @@ public:
 private:
 	aie::Texture* m_texture;
 
+	int i = 0;
+
 	float m_posX;
 	float m_posY;
 };

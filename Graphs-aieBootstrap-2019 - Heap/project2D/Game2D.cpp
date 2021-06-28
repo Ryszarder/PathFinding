@@ -34,60 +34,61 @@ Game2D::~Game2D()
 
 void Game2D::Update(float deltaTime)
 {
+	m_nAgent->Update(deltaTime);
 
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
 	float camPosX;
 	float camPosY;
 
-	m_2dRenderer->GetCameraPos(camPosX, camPosY);
+	//m_2dRenderer->GetCameraPos(camPosX, camPosY);
 
-	if (input->IsKeyDown(aie::INPUT_KEY_W))
-		camPosY += 500.0f * deltaTime;
+	//if (input->IsKeyDown(aie::INPUT_KEY_W))
+	//	camPosY += 500.0f * deltaTime;
 
-	if (input->IsKeyDown(aie::INPUT_KEY_S))
-		camPosY -= 500.0f * deltaTime;
+	//if (input->IsKeyDown(aie::INPUT_KEY_S))
+	//	camPosY -= 500.0f * deltaTime;
 
-	if (input->IsKeyDown(aie::INPUT_KEY_A))
-		camPosX -= 500.0f * deltaTime;
+	//if (input->IsKeyDown(aie::INPUT_KEY_A))
+	//	camPosX -= 500.0f * deltaTime;
 
-	if (input->IsKeyDown(aie::INPUT_KEY_D))
-		camPosX += 500.0f * deltaTime;
+	//if (input->IsKeyDown(aie::INPUT_KEY_D))
+	//	camPosX += 500.0f * deltaTime;
 
-	m_2dRenderer->SetCameraPos(camPosX, camPosY);
+	//m_2dRenderer->SetCameraPos(camPosX, camPosY);
 
-	// Exit the application if escape is pressed.
-	if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))
-	{
-		aie::Application* application = aie::Application::GetInstance();
-		application->Quit();
-	}
+	//// Exit the application if escape is pressed.
+	//if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))
+	//{
+	//	aie::Application* application = aie::Application::GetInstance();
+	//	application->Quit();
+	//}
 
-	if (input->WasMouseButtonPressed(0))
-	{
-		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
-		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+	//if (input->WasMouseButtonPressed(0))
+	//{
+	//	Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+	//	GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
-		if (pNode)
-		{
-			pNode->m_bBlocked = true;
-		}
+	//	if (pNode)
+	//	{
+	//		pNode->m_bBlocked = true;
+	//	}
 
-		//Draw();
-	}
+	//	//Draw();
+	//}
 
-	if (input->WasMouseButtonPressed(1))
-	{
-		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
-		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+	//if (input->WasMouseButtonPressed(1))
+	//{
+	//	Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+	//	GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
-		if (pNode)
-		{
-			pNode->m_bBlocked = false;
-		}
+	//	if (pNode)
+	//	{
+	//		pNode->m_bBlocked = false;
+	//	}
 
-		//Draw();
-	}
+	//	//Draw();
+	//}
 }
 
 void Game2D::Draw()

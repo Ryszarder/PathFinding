@@ -1,4 +1,5 @@
 #include "Agent.h"
+#include "Input.h"
 
 Agent::Agent()
 {
@@ -14,8 +15,46 @@ Agent::~Agent()
 	m_texture = nullptr;
 }
 
+enum State
+{
+	STATE_IDLE,
+	STATE_PROTOL,
+	STATE_FOLLOW
+};
+
 void Agent::Update(float deltaTime)
 {
+	aie::Input* input = aie::Input::GetInstance();
+
+	switch (i)
+	{
+	case STATE_IDLE:
+		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		{
+			i = 1;
+		}
+
+		/*else if (input->IsKeyDown(aie::INPUT_KEY_D))
+		{
+		}*/
+
+		break;
+
+	case STATE_PROTOL:
+		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		{
+			i = 2;
+		}
+		break;
+
+	case STATE_FOLLOW:
+		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		{
+			m_posX += 500.0f * deltaTime;
+			i = 1;
+		}
+		break;
+	}
 }
 
 void Agent::Draw(aie::Renderer2D* renderer)
