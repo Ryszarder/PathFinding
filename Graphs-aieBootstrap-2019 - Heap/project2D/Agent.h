@@ -9,7 +9,7 @@ public:
 	Agent();
 	~Agent();
 
-	void Update(float deltaTime);
+	void Update(/*float deltaTime*/);
 	void Draw(aie::Renderer2D* renderer);
 
 	enum State

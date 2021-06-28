@@ -18,7 +18,7 @@ Agent::~Agent()
 	m_texture = nullptr;
 }
 
-void Agent::Update(float deltaTime)
+void Agent::Update(/*float deltaTime*/)
 {
 	aie::Input* input = aie::Input::GetInstance();
 
@@ -49,10 +49,18 @@ void Agent::Update(float deltaTime)
 	case STATE_FOLLOW:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
+			m_2dRenderer->Begin();
+
+			m_pPathfinder->Render(m_2dRenderer);
 			std::vector<Vector2> path;
 			Vector2 start = { 300, 600 };
 			Vector2 end = { 700, 80 };
 			m_pPathfinder->AStarPath(start, end, path);
+			for (int i = 0; i < path.size(); ++i)
+			{
+				m_2dRenderer->DrawCircle(path[i].x, path[i].y, 10);
+			}
+			m_2dRenderer->End();
 			state = State::STATE_PROTOL;
 		}
 		break;

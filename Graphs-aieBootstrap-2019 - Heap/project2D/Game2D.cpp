@@ -34,7 +34,7 @@ Game2D::~Game2D()
 
 void Game2D::Update(float deltaTime)
 {
-	m_nAgent->Update(deltaTime);
+	m_nAgent->Update(/*deltaTime*/);
 
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
@@ -126,6 +126,7 @@ void Game2D::Draw()
 	//m_2dRenderer->DrawText2D(m_font, "Arrow keys to move.", 15.0f, windowHeight - 64.0f);
 	//m_2dRenderer->DrawText2D(m_font, "WASD to move camera.", 15.0f, windowHeight - 96.0f);
 	//m_2dRenderer->DrawText2D(m_font, "Press ESC to quit!", 15.0f, windowHeight - 128.0f);
+	m_nAgent->Update(/*deltaTime*/);
 	m_nAgent->Draw(m_2dRenderer);
 	// Done drawing sprites. Must be called at the end of the Draw().
 	m_2dRenderer->End();
