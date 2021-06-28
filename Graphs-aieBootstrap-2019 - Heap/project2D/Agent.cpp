@@ -38,6 +38,8 @@ void Agent::Update(float deltaTime)
 	case STATE_PROTOL:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
+			m_texture->Unload();
+			m_texture = new aie::Texture("../bin/textures/ship.png");
 			state = State::STATE_FOLLOW;
 		}
 		break;
