@@ -21,18 +21,18 @@ Agent::~Agent()
 
 void Agent::Update(float deltaTime)
 {
-	aie::Input* input = aie::Input::GetInstance();
+	aie::Input* m_Input = aie::Input::GetInstance();
 
 	switch (state)
 	{
 	case STATE_IDLE:
 		m_bFollow = false;
-		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		if (m_Input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
 			state = State::STATE_PROTOL;
 		}
 
-		else if (input->WasKeyPressed(aie::INPUT_KEY_D))
+		else if (m_Input->WasKeyPressed(aie::INPUT_KEY_D))
 		{
 			state = State::STATE_FOLLOW;
 		}
@@ -40,7 +40,7 @@ void Agent::Update(float deltaTime)
 		break;
 
 	case STATE_PROTOL:
-		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		if (m_Input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
 			m_texture->Unload();
 			m_texture = new aie::Texture("../bin/textures/ship.png");
@@ -49,7 +49,7 @@ void Agent::Update(float deltaTime)
 		break;
 
 	case STATE_FOLLOW:
-		if (input->WasKeyPressed(aie::INPUT_KEY_W))
+		if (m_Input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
 			m_bFollow = true;
 

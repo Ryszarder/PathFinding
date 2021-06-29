@@ -11,6 +11,7 @@ public:
 	void Push(GraphNode* nValue);
 	GraphNode* Pop();
 	GraphNode* Peek();
+	void UpdateNode(GraphNode* pNode);
 
 	int Size();
 	void Clear();

@@ -80,6 +80,25 @@ GraphNode* Heap::Peek()
 	return nullptr;
 }
 
+void Heap::UpdateNode(GraphNode* pNode)
+{
+	int nCurrentIndex = m_Data.Find(pNode);
+	int nParentIndex = GetParentIndex(nCurrentIndex);
+
+	//Chech if child is less than parent
+	while (m_Data[nCurrentIndex]->m_nFscore < m_Data[nParentIndex]->m_nFscore)
+	{
+		//Swap
+		GraphNode* temp = m_Data[nCurrentIndex];
+		m_Data[nCurrentIndex] = m_Data[nParentIndex];
+		m_Data[nParentIndex] = temp;
+
+		//Update indices
+		nCurrentIndex = nParentIndex;
+		nParentIndex = GetParentIndex(nCurrentIndex);
+	}
+}
+
 int Heap::Size()
 {
 	return m_Data.GetSize();

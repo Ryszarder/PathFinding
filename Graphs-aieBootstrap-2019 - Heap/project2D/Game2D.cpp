@@ -4,8 +4,8 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-#include "Player.h"
-#include "Agent.h"
+//#include "Player.h"
+//#include "Agent.h"
 
 Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game(title, width, height, fullscreen)
 {
@@ -34,12 +34,10 @@ Game2D::~Game2D()
 
 void Game2D::Update(float deltaTime)
 {
-	m_nAgent->Update(deltaTime);
-
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	float camPosX;
-	float camPosY;
+	//float camPosX;
+	//float camPosY;
 
 	//m_2dRenderer->GetCameraPos(camPosX, camPosY);
 
@@ -89,6 +87,8 @@ void Game2D::Update(float deltaTime)
 
 		//Draw();
 	}
+
+	m_nAgent->Update(deltaTime);
 }
 
 void Game2D::Draw()

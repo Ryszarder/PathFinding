@@ -273,6 +273,8 @@ bool Pathfinder::AStarPath(Vector2 v2Start, Vector2 v2End, std::vector<Vector2>&
 					pNeighbour->m_nGscore = newG;
 					pNeighbour->m_nFscore = pNeighbour->m_nGscore + pNeighbour->m_nHscore;
 					pNeighbour->m_pPrev = pCurrent;
+
+					m_OpenList.UpdateNode(pNeighbour);
 				}
 			}
 			else

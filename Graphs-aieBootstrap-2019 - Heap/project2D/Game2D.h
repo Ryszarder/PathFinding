@@ -3,10 +3,10 @@
 #include "Game.h"
 #include "Renderer2D.h"
 #include "Pathfinder.h"
+#include "Agent.h"
 
-class Player;
-
-class Agent;
+//class Player;
+//class Agent;
 
 class Game2D : public aie::Game
 {
