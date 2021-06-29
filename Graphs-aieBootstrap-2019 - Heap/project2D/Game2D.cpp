@@ -108,7 +108,7 @@ void Game2D::Draw()
 
 	m_nAgent->Draw(m_2dRenderer);
 
-	std::vector<Vector2> path;
+	/*std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
 	Vector2 end = { 800, 60 };
 	m_pPathfinder->AStarPath(start, end, path);
@@ -116,7 +116,7 @@ void Game2D::Draw()
 	for (int i = 0; i < path.size(); ++i)
 	{
 		m_2dRenderer->DrawCircle(path[i].x, path[i].y, 10);
-	}
+	}*/
 	
 	// Draw some text.
 	float windowHeight = (float)application->GetWindowHeight();
