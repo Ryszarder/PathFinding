@@ -3,11 +3,11 @@
 #include "Texture.h"
 #include "Pathfinder.h"
 
-class Agent
+class Enemy
 {
 public:
-	Agent();
-	~Agent();
+	Enemy();
+	~Enemy();
 
 	void Update(float fDeltaTime);
 	void Draw(aie::Renderer2D* pRenderer);
@@ -15,13 +15,12 @@ public:
 	enum State
 	{
 		STATE_IDLE,
-		STATE_PROTOL,
 		STATE_FOLLOW
 	};
 
 private:
-	aie::Texture* m_Texture;
-	aie::Renderer2D* m_2dRenderer;
+	aie::Texture** m_Enemies;
+	aie::Renderer2D* m_2dRender;
 	std::vector<Vector2> m_vPath;
 
 	Pathfinder* m_pPathfinder;

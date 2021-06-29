@@ -1,5 +1,4 @@
 #include "Game2D.h"
-
 #include "Application.h"
 #include "Texture.h"
 #include "Font.h"
@@ -16,7 +15,8 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	m_font = new aie::Font("./font/consolas.ttf", 24);
 
 	m_pPathfinder = new Pathfinder();
-	m_nAgent = new Agent();
+	m_pAgent = new Agent();
+	m_pEnemy = new Enemy();
 }
 
 Game2D::~Game2D()
@@ -29,14 +29,19 @@ Game2D::~Game2D()
 
 	delete m_pPathfinder;
 
-	delete m_nAgent;
+	delete m_pAgent;
+
+	delete m_pEnemy;
 }
 
 void Game2D::Update(float deltaTime)
 {
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	m_nAgent->Update(deltaTime);
+	m_pAgent->Update(deltaTime);
+
+	m_pEnemy->Update(deltaTime);
+
 	//float camPosX;
 	//float camPosY;
 
@@ -106,7 +111,9 @@ void Game2D::Draw()
 	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
 	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
 
-	m_nAgent->Draw(m_2dRenderer);
+	m_pAgent->Draw(m_2dRenderer);
+
+	m_pEnemy->Draw(m_2dRenderer);
 
 	/*std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
@@ -123,9 +130,6 @@ void Game2D::Draw()
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", application->GetFPS());
 	m_2dRenderer->DrawText2D(m_font, fps, 15.0f, windowHeight - 32.0f);
-	//m_2dRenderer->DrawText2D(m_font, "Arrow keys to move.", 15.0f, windowHeight - 64.0f);
-	//m_2dRenderer->DrawText2D(m_font, "WASD to move camera.", 15.0f, windowHeight - 96.0f);
-	//m_2dRenderer->DrawText2D(m_font, "Press ESC to quit!", 15.0f, windowHeight - 128.0f);
 	
 	// Done drawing sprites. Must be called at the end of the Draw().
 	m_2dRenderer->End();

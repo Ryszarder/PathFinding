@@ -3,10 +3,10 @@
 
 Agent::Agent()
 {
-	m_texture = new aie::Texture("../bin/textures/Dice.png");
+	m_Texture = new aie::Texture("../bin/textures/Dice.png");
 
-	m_posX = 40;
-	m_posY = 920;
+	m_fPosX = 40;
+	m_fPosY = 920;
 
 	m_pPathfinder = new Pathfinder();
 	m_bFollow = false;
@@ -14,8 +14,8 @@ Agent::Agent()
 
 Agent::~Agent()
 {
-	delete m_texture;
-	m_texture = nullptr;
+	delete m_Texture;
+	m_Texture = nullptr;
 
 	delete m_pPathfinder;
 	m_pPathfinder = nullptr;
@@ -49,39 +49,41 @@ void Agent::Update(float deltaTime)
 
 	if (m_Input->WasKeyPressed(aie::INPUT_KEY_W))
 	{
-		m_posY += 20.0f;
+		m_fPosY += 20.0f;
 	}
 
 	if (m_Input->WasKeyPressed(aie::INPUT_KEY_S))
 	{
-		m_posY -= 20.0f;
+		m_fPosY -= 20.0f;
 	}
 
 	if (m_Input->WasKeyPressed(aie::INPUT_KEY_A))
 	{
-		m_posX -= 20.0f;
+		m_fPosX -= 20.0f;
 	}
 
 	if (m_Input->WasKeyPressed(aie::INPUT_KEY_D))
 	{
-		m_posX += 20.0f;
+		m_fPosX += 20.0f;
 	}
-	Vector2 start = { m_posX, m_posY };
+
+	Vector2 start = { m_fPosX, m_fPosY };
 	Vector2 end = { 900, 60 };
-	m_pPathfinder->AStarPath(start, end, path);
+	m_pPathfinder->AStarPath(start, end, m_vPath);
 	m_bFollow = true;
-	switch (state)
+
+	switch (m_eState)
 	{
 	case STATE_IDLE:
 		/*m_bFollow = false;*/
 		if (m_Input->WasKeyPressed(aie::INPUT_KEY_R))
 		{
-			state = State::STATE_PROTOL;
+			m_eState = State::STATE_PROTOL;
 		}
 
 		else if (m_Input->WasKeyPressed(aie::INPUT_KEY_SPACE))
 		{
-			state = State::STATE_FOLLOW;
+			m_eState = State::STATE_FOLLOW;
 		}
 
 		break;
@@ -89,10 +91,10 @@ void Agent::Update(float deltaTime)
 	case STATE_PROTOL:
 		if (m_Input->WasKeyPressed(aie::INPUT_KEY_E))
 		{
-			m_texture->Unload();
-			m_texture = new aie::Texture("../bin/textures/ship.png");
+			m_Texture->Unload();
+			m_Texture = new aie::Texture("../bin/textures/ship.png");
 
-			state = State::STATE_IDLE;
+			m_eState = State::STATE_IDLE;
 		}
 		break;
 
@@ -105,21 +107,21 @@ void Agent::Update(float deltaTime)
 			Vector2 end = { 900, 60 };
 			m_pPathfinder->AStarPath(start, end, path);*/
 
-			state = State::STATE_PROTOL;
+			m_eState = State::STATE_PROTOL;
 		}
 		break;
 	}
 }
 
-void Agent::Draw(aie::Renderer2D* renderer)
+void Agent::Draw(aie::Renderer2D* pRenderer)
 {
-	renderer->DrawSprite(m_texture, m_posX, m_posY, 32, 32);
+	pRenderer->DrawSprite(m_Texture, m_fPosX, m_fPosY, 32, 32);
 
-	if (m_bFollow && path.size() > 1)
+	if (m_bFollow && m_vPath.size() > 1)
 	{
-		for (int i = 0; i < path.size(); ++i)
+		for (int i = 0; i < m_vPath.size(); ++i)
 		{
-			renderer->DrawCircle(path[i].x, path[i].y, 10);
+			pRenderer->DrawCircle(m_vPath[i].x, m_vPath[i].y, 10);
 		}
 	}
 }

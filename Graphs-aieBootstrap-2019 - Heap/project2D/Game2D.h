@@ -4,6 +4,7 @@
 #include "Renderer2D.h"
 #include "Pathfinder.h"
 #include "Agent.h"
+#include "Enemy.h"
 
 //class Player;
 //class Agent;
@@ -24,5 +25,6 @@ protected:
 	aie::Font*	m_font;
 
 	Pathfinder* m_pPathfinder;
-	Agent* m_nAgent;
+	Agent* m_pAgent;
+	Enemy* m_pEnemy;
 };

@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game2D.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="main.cpp" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="Agent.h" />
     <ClInclude Include="DynamicArray.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game2D.h" />
     <ClInclude Include="GraphNode.h" />
     <ClInclude Include="Heap.h" />
