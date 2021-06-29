@@ -6,9 +6,11 @@ Agent::Agent()
 	m_texture = new aie::Texture("../bin/textures/Dice.png");
 
 	m_posX = 300;
-	m_posY = 600; 
-	
+	m_posY = 600;
+
 	m_pPathfinder = new Pathfinder();
+
+	m_bFollow = false;
 }
 
 Agent::~Agent()
@@ -24,6 +26,7 @@ void Agent::Update(float deltaTime)
 	switch (state)
 	{
 	case STATE_IDLE:
+		m_bFollow = false;
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
 			state = State::STATE_PROTOL;
@@ -48,14 +51,12 @@ void Agent::Update(float deltaTime)
 	case STATE_FOLLOW:
 		if (input->WasKeyPressed(aie::INPUT_KEY_W))
 		{
-			std::vector<Vector2> path;
-			Vector2 start = { 300, 600 };
+			m_bFollow = true;
+
+			Vector2 start = { m_posX, m_posY };
 			Vector2 end = { 700, 80 };
 			m_pPathfinder->AStarPath(start, end, path);
-			for (int i = 0; i < path.size(); ++i)
-			{
-				m_2dRenderer->DrawCircle(path[i].x, path[i].y, 10);
-			}
+
 			state = State::STATE_PROTOL;
 		}
 		break;
@@ -65,4 +66,12 @@ void Agent::Update(float deltaTime)
 void Agent::Draw(aie::Renderer2D* renderer)
 {
 	renderer->DrawSprite(m_texture, m_posX, m_posY, 32, 32);
+
+	if (m_bFollow && path.size() > 1)
+	{
+		for (int i = 0; i < path.size(); ++i)
+		{
+			renderer->DrawCircle(path[i].x, path[i].y, 10);
+		}
+	}
 }

@@ -58,37 +58,37 @@ void Game2D::Update(float deltaTime)
 	//m_2dRenderer->SetCameraPos(camPosX, camPosY);
 
 	//// Exit the application if escape is pressed.
-	//if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))
-	//{
-	//	aie::Application* application = aie::Application::GetInstance();
-	//	application->Quit();
-	//}
+	if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))
+	{
+		aie::Application* application = aie::Application::GetInstance();
+		application->Quit();
+	}
 
-	//if (input->WasMouseButtonPressed(0))
-	//{
-	//	Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
-	//	GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+	if (input->WasMouseButtonPressed(0))
+	{
+		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
-	//	if (pNode)
-	//	{
-	//		pNode->m_bBlocked = true;
-	//	}
+		if (pNode)
+		{
+			pNode->m_bBlocked = true;
+		}
 
-	//	//Draw();
-	//}
+		//Draw();
+	}
 
-	//if (input->WasMouseButtonPressed(1))
-	//{
-	//	Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
-	//	GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+	if (input->WasMouseButtonPressed(1))
+	{
+		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
-	//	if (pNode)
-	//	{
-	//		pNode->m_bBlocked = false;
-	//	}
+		if (pNode)
+		{
+			pNode->m_bBlocked = false;
+		}
 
-	//	//Draw();
-	//}
+		//Draw();
+	}
 }
 
 void Game2D::Draw()
@@ -110,7 +110,6 @@ void Game2D::Draw()
 	std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
 	Vector2 end = { 800, 60 };
-	//Vector2 end = { 800, 60 };
 	m_pPathfinder->AStarPath(start, end, path);
 
 	for (int i = 0; i < path.size(); ++i)

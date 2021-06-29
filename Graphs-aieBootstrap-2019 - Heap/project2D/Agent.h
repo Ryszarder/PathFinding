@@ -29,5 +29,9 @@ private:
 	float m_posY;
 
 	Pathfinder* m_pPathfinder;
+
+	std::vector<Vector2> path;
+
+	bool m_bFollow;
 };
 
