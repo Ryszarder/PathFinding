@@ -19,7 +19,7 @@ public:
 	};
 
 private:
-	aie::Texture** m_Enemies;
+	aie::Texture* m_Enemies;
 	aie::Renderer2D* m_2dRender;
 	std::vector<Vector2> m_vPath;
 
