@@ -36,6 +36,7 @@ void Game2D::Update(float deltaTime)
 {
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
+	m_nAgent->Update(deltaTime);
 	//float camPosX;
 	//float camPosY;
 
@@ -72,7 +73,7 @@ void Game2D::Update(float deltaTime)
 			pNode->m_bBlocked = true;
 		}
 
-		//Draw();
+		Draw();
 	}
 
 	if (input->WasMouseButtonPressed(1))
@@ -85,10 +86,8 @@ void Game2D::Update(float deltaTime)
 			pNode->m_bBlocked = false;
 		}
 
-		//Draw();
+		Draw();
 	}
-
-	m_nAgent->Update(deltaTime);
 }
 
 void Game2D::Draw()
@@ -106,6 +105,8 @@ void Game2D::Draw()
 
 	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
 	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
+
+	m_nAgent->Draw(m_2dRenderer);
 
 	std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
@@ -125,7 +126,7 @@ void Game2D::Draw()
 	//m_2dRenderer->DrawText2D(m_font, "Arrow keys to move.", 15.0f, windowHeight - 64.0f);
 	//m_2dRenderer->DrawText2D(m_font, "WASD to move camera.", 15.0f, windowHeight - 96.0f);
 	//m_2dRenderer->DrawText2D(m_font, "Press ESC to quit!", 15.0f, windowHeight - 128.0f);
-	m_nAgent->Draw(m_2dRenderer);
+	
 	// Done drawing sprites. Must be called at the end of the Draw().
 	m_2dRenderer->End();
 }

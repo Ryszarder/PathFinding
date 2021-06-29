@@ -22,15 +22,14 @@ public:
 private:
 	aie::Texture* m_texture;
 	aie::Renderer2D* m_2dRenderer;
+	std::vector<Vector2> path;
+
+	Pathfinder* m_pPathfinder;
 
 	State state = State::STATE_IDLE;
 
 	float m_posX;
 	float m_posY;
-
-	Pathfinder* m_pPathfinder;
-
-	std::vector<Vector2> path;
 
 	bool m_bFollow;
 };

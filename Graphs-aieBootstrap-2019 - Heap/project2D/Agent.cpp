@@ -9,7 +9,6 @@ Agent::Agent()
 	m_posY = 600;
 
 	m_pPathfinder = new Pathfinder();
-
 	m_bFollow = false;
 }
 
@@ -17,11 +16,36 @@ Agent::~Agent()
 {
 	delete m_texture;
 	m_texture = nullptr;
+
+	delete m_pPathfinder;
+	m_pPathfinder = nullptr;
 }
 
 void Agent::Update(float deltaTime)
 {
 	aie::Input* m_Input = aie::Input::GetInstance();
+
+	if (m_Input->WasMouseButtonPressed(0))
+	{
+		Vector2 mousePos = { m_Input->GetMouseX(), m_Input->GetMouseY() };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+
+		if (pNode)
+		{
+			pNode->m_bBlocked = true;
+		}
+	}
+
+	if (m_Input->WasMouseButtonPressed(1))
+	{
+		Vector2 mousePos = { m_Input->GetMouseX(), m_Input->GetMouseY() };
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
+
+		if (pNode)
+		{
+			pNode->m_bBlocked = false;
+		}
+	}
 
 	switch (state)
 	{
