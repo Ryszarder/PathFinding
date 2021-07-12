@@ -43,7 +43,7 @@ void Game2D::Update(float deltaTime)
 {
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	//m_pAgent->Update(deltaTime);
+	/*m_pAgent->Update(deltaTime);*/
 
 	//m_pEnemy->Update(deltaTime);
 
@@ -118,7 +118,7 @@ void Game2D::Draw()
 	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
 	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
 
-	//m_pAgent->Draw(m_2dRenderer);
+	/*m_pAgent->Draw(m_2dRenderer);*/
 
 	//m_pEnemy->Draw(m_2dRenderer);
 

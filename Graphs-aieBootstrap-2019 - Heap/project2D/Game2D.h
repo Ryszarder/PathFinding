@@ -31,4 +31,5 @@ protected:
 	Enemy* m_pEnemy;
 
 	AgentTwo* m_pAI;
+
 };
