@@ -14,6 +14,9 @@ public:
 	void Update(float deltaTime);
 	void Draw(aie::Renderer2D* pRenderer);
 
+	void SetPos(Vector2 v2Position);
+	Vector2 GetPos();
+
 private:
 	Vector2 m_v2Position;
 	std::vector<Vector2> m_path;

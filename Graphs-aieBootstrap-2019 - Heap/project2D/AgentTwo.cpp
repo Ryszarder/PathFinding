@@ -56,6 +56,8 @@ void AgentTwo::Update(float deltaTime)
 			m_pPathfinder->AStarPath(m_v2Position, m_v2Destination, m_path);
 		}
 	}
+
+	SetPos(m_v2Position);
 }
 
 void AgentTwo::Draw(aie::Renderer2D* pRenderer)
@@ -69,4 +71,14 @@ void AgentTwo::Draw(aie::Renderer2D* pRenderer)
 			pRenderer->DrawLine(m_path[i].x, m_path[i].y, m_path[i + 1].x, m_path[i + 1].y, 5.0f);
 		}
 	}
+}
+
+void AgentTwo::SetPos(Vector2 v2Position)
+{
+	m_v2Position = v2Position;
+}
+
+Vector2 AgentTwo::GetPos()
+{
+	return m_v2Position;
 }

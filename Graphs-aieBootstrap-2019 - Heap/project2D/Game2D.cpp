@@ -104,7 +104,7 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}
 
-	if (input->WasKeyPressed(aie::INPUT_KEY_SPACE))
+	/*if (input->WasMouseButtonPressed(0))
 	{
 		Vector2 ConPos = m_pControl->GetPos();
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
@@ -117,10 +117,35 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}
 
+	if (input->WasMouseButtonPressed(0))
+	{
+		Vector2 ConPos = m_pControl->GetPos();
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
 
+		if (pNode)
+		{
+			pNode->m_bBlocked = true;
+		}
 
-	m_pAI->Update(deltaTime);
+		Draw();
+	}*/
 
+	if (m_pAI != nullptr)
+	{
+		Vector2 AgentPos = m_pAI->GetPos();
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(AgentPos);
+
+		if (pNode->m_bBlocked == true)
+		{
+			m_pAI = nullptr;
+		}
+
+		if(m_pAI != nullptr)
+		{
+			m_pAI->Update(deltaTime);
+
+		}
+	}
 	m_pControl->Update(deltaTime);
 }
 
@@ -144,7 +169,11 @@ void Game2D::Draw()
 
 	//m_pEnemy->Draw(m_2dRenderer);
 
-	m_pAI->Draw(m_2dRenderer);
+	if (m_pAI != nullptr)
+	{
+		m_pAI->Draw(m_2dRenderer);
+	}
+	
 
 	m_pControl->Draw(m_2dRenderer);
 
