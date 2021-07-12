@@ -4,8 +4,9 @@
 #include "Font.h"
 #include "Input.h"
 //#include "Player.h"
-//#include "Agent.h"
-//#include "AgentTwo.h"
+#include "Agent.h"
+#include "Enemy.h"
+#include "AgentTwo.h"
 
 Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game(title, width, height, fullscreen)
 {
@@ -19,33 +20,32 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	m_pAgent = new Agent();
 	m_pEnemy = new Enemy();
 
-	//m_pAI = new AgentTwo(m_pPathfinder, { 200, 200 });
+	m_pAI = new AgentTwo(m_pPathfinder, { 200, 200 });
 }
 
 Game2D::~Game2D()
 {
-	// Deleted the textures.
-	delete m_font;
-
-	// Delete the renderer.
-	delete m_2dRenderer;
-
-	delete m_pPathfinder;
-
-	delete m_pAgent;
+	delete m_pAI;
 
 	delete m_pEnemy;
 
-	//delete m_pAI;
+	delete m_pAgent;
+
+	delete m_pPathfinder;
+	// Delete the renderer.
+	delete m_2dRenderer;
+
+	// Deleted the textures.
+	delete m_font;
 }
 
 void Game2D::Update(float deltaTime)
 {
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	m_pAgent->Update(deltaTime);
+	//m_pAgent->Update(deltaTime);
 
-	m_pEnemy->Update(deltaTime);
+	//m_pEnemy->Update(deltaTime);
 
 	//float camPosX;
 	//float camPosY;
@@ -99,7 +99,7 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}
 
-	//m_pAI->Update(deltaTime);
+	m_pAI->Update(deltaTime);
 }
 
 void Game2D::Draw()
@@ -118,11 +118,11 @@ void Game2D::Draw()
 	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
 	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
 
-	m_pAgent->Draw(m_2dRenderer);
+	//m_pAgent->Draw(m_2dRenderer);
 
-	m_pEnemy->Draw(m_2dRenderer);
+	//m_pEnemy->Draw(m_2dRenderer);
 
-	//m_pAI->Draw(m_2dRenderer);
+	m_pAI->Draw(m_2dRenderer);
 
 	/*std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };

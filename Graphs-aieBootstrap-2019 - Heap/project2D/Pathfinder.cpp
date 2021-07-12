@@ -1,7 +1,6 @@
 #include "Pathfinder.h"
 
-#define NODE_SIZE 20
-#define NODE_DRAW_SIZE 19
+
 
 Pathfinder::Pathfinder()
 {

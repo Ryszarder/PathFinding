@@ -3,12 +3,13 @@
 #include "Game.h"
 #include "Renderer2D.h"
 #include "Pathfinder.h"
-#include "Agent.h"
-#include "Enemy.h"
+//#include "Agent.h"
+//#include "Enemy.h"
 
 //class Player;
-//class Agent;
-//class AgentTwo;
+class Agent;
+class Enemy;
+class AgentTwo;
 
 class Game2D : public aie::Game
 {
@@ -29,5 +30,5 @@ protected:
 	Agent* m_pAgent;
 	Enemy* m_pEnemy;
 
-	//AgentTwo* m_pAI;
+	AgentTwo* m_pAI;
 };
