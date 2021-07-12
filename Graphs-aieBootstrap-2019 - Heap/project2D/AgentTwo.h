@@ -22,6 +22,8 @@ private:
 	std::vector<Vector2> m_path;
 	Pathfinder* m_pPathfinder;
 	Vector2 m_v2Destination;
+	Vector2 m_v2Velocity;
 	float m_fSpeed;
+	float fMaxSpeed;
 };
 

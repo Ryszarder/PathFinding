@@ -1,6 +1,7 @@
 #include "AgentTwo.h"
 #include "Pathfinder.h"
 #include <math.h>
+#include <Input.h>
 
 AgentTwo::AgentTwo(Pathfinder* pPathfinder, Vector2 v2StartPos)
 {
@@ -11,6 +12,10 @@ AgentTwo::AgentTwo(Pathfinder* pPathfinder, Vector2 v2StartPos)
 	m_v2Destination.y = rand() % /*2000*/(GRID_SIZE * NODE_SIZE);
 
 	m_fSpeed = 100.0f;
+	m_fMaxSpeed = 200.0f;
+
+	m_v2Velocity.x = 0;
+	m_v2Velocity.y = 0;
 }
 
 AgentTwo::~AgentTwo()
@@ -20,6 +25,29 @@ AgentTwo::~AgentTwo()
 
 void AgentTwo::Update(float deltaTime)
 {
+	aie::Input* input = aie::Input::GetInstance();
+
+	Vector2 v2Mouse;
+	v2Mouse.x = input->GetMouseX();
+	v2Mouse.y = input->GetMouseY();
+
+	//Seek behaviours
+	Vector2 v3Dir = v2Mouse - m_v2Position;
+	v3Dir = v3Dir.get_normalised();
+
+	Vector2 vDesiredVelocity = v3Dir * m_fMaxSpeed;
+	Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
+
+	m_v2Velocity += v2SteeringForce * deltaTime;
+	m_v2Velocity += m_v2Velocity * deltaTime;
+
+	/*m_v2Velocity += v3Dir * m_fSpeed * deltaTime;
+	if (m_v2Velocity.get_magnitude() > 200)
+	{
+		m_v2Velocity = m_v2Velocity.get_normalised();
+		m_v2Velocity = m_v2Velocity * m_fMaxSpeed;
+	}*/
+
 	if (m_path.size() < 2)
 	{	
 		m_v2Destination.x = rand() % /*2000*/ (GRID_SIZE * NODE_SIZE);
