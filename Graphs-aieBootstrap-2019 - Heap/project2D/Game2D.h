@@ -31,8 +31,9 @@ protected:
 	//Agent* m_pAgent;
 	//Enemy* m_pEnemy;
 
-	AgentTwo* m_pAI;
+	AgentTwo* m_pAI[4];
 
 	Controller* m_pControl;
 
+	int count;
 };

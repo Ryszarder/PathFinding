@@ -21,16 +21,25 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	//m_pAgent = new Agent();
 	//m_pEnemy = new Enemy();
 
-	m_pAI = new AgentTwo(m_pPathfinder, { 200, 200 });
+	for (int i = 0; i < 4; ++i)
+	{
+		m_pAI[i] = new AgentTwo(m_pPathfinder, { 200, 200 });
+	}
+	
 
 	m_pControl = new Controller(m_pPathfinder, { 100, 100 });
+
+	count = 0;
 }
 
 Game2D::~Game2D()
 {
 	delete m_pControl;
 
-	delete m_pAI;
+	delete m_pAI[0];
+	delete m_pAI[1];
+	delete m_pAI[2];
+	delete m_pAI[3];
 
 	//delete m_pEnemy;
 
@@ -46,6 +55,10 @@ Game2D::~Game2D()
 
 void Game2D::Update(float deltaTime)
 {
+	if (count == 4)
+	{
+		exit(0);
+	}
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
 	//m_pAgent->Update(deltaTime);
@@ -130,22 +143,29 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}*/
 
-	if (m_pAI != nullptr)
+	for (int i = 0; i < 4; ++i)
 	{
-		Vector2 AgentPos = m_pAI->GetPos();
-		GraphNode* pNode = m_pPathfinder->GetNodeByPos(AgentPos);
-
-		if (pNode->m_bBlocked == true)
+		if (m_pAI[i] != nullptr)
 		{
-			m_pAI = nullptr;
+			Vector2 AgentPos = m_pAI[i]->GetPos();
+			GraphNode* pNode = m_pPathfinder->GetNodeByPos(AgentPos);
+
+			if (pNode->m_bBlocked == true)
+			{
+				m_pAI[i] = nullptr;
+
+				count++;
+			}
+
 		}
 
-		if(m_pAI != nullptr)
+		if(m_pAI[i] != nullptr)
 		{
-			m_pAI->Update(deltaTime);
+			m_pAI[i]->Update(deltaTime);
 
 		}
 	}
+	
 	m_pControl->Update(deltaTime);
 }
 
@@ -169,9 +189,13 @@ void Game2D::Draw()
 
 	//m_pEnemy->Draw(m_2dRenderer);
 
-	if (m_pAI != nullptr)
+	
+	for (int i = 0; i < 4; ++i)
 	{
-		m_pAI->Draw(m_2dRenderer);
+		if (m_pAI[i] != nullptr)
+		{
+			m_pAI[i]->Draw(m_2dRenderer);
+		}
 	}
 	
 
