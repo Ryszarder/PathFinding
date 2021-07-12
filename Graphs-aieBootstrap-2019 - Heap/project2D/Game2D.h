@@ -7,9 +7,10 @@
 //#include "Enemy.h"
 
 //class Player;
-class Agent;
-class Enemy;
+//class Agent;
+//class Enemy;
 class AgentTwo;
+class Controller;
 
 class Game2D : public aie::Game
 {
@@ -27,9 +28,11 @@ protected:
 	aie::Font*	m_font;
 
 	Pathfinder* m_pPathfinder;
-	Agent* m_pAgent;
-	Enemy* m_pEnemy;
+	//Agent* m_pAgent;
+	//Enemy* m_pEnemy;
 
 	AgentTwo* m_pAI;
+
+	Controller* m_pControl;
 
 };

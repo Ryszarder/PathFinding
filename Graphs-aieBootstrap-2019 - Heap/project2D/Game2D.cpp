@@ -4,9 +4,10 @@
 #include "Font.h"
 #include "Input.h"
 //#include "Player.h"
-#include "Agent.h"
-#include "Enemy.h"
+//#include "Agent.h"
+//#include "Enemy.h"
 #include "AgentTwo.h"
+#include "Controller.h"
 
 Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game(title, width, height, fullscreen)
 {
@@ -17,19 +18,23 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	m_font = new aie::Font("./font/consolas.ttf", 24);
 
 	m_pPathfinder = new Pathfinder();
-	m_pAgent = new Agent();
-	m_pEnemy = new Enemy();
+	//m_pAgent = new Agent();
+	//m_pEnemy = new Enemy();
 
 	m_pAI = new AgentTwo(m_pPathfinder, { 200, 200 });
+
+	m_pControl = new Controller(m_pPathfinder, { 100, 100 });
 }
 
 Game2D::~Game2D()
 {
+	delete m_pControl;
+
 	delete m_pAI;
 
-	delete m_pEnemy;
+	//delete m_pEnemy;
 
-	delete m_pAgent;
+	//delete m_pAgent;
 
 	delete m_pPathfinder;
 	// Delete the renderer.
@@ -43,7 +48,7 @@ void Game2D::Update(float deltaTime)
 {
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	/*m_pAgent->Update(deltaTime);*/
+	//m_pAgent->Update(deltaTime);
 
 	//m_pEnemy->Update(deltaTime);
 
@@ -100,6 +105,8 @@ void Game2D::Update(float deltaTime)
 	}
 
 	m_pAI->Update(deltaTime);
+
+	m_pControl->Update(deltaTime);
 }
 
 void Game2D::Draw()
@@ -118,11 +125,13 @@ void Game2D::Draw()
 	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
 	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
 
-	/*m_pAgent->Draw(m_2dRenderer);*/
+	//m_pAgent->Draw(m_2dRenderer);
 
 	//m_pEnemy->Draw(m_2dRenderer);
 
 	m_pAI->Draw(m_2dRenderer);
+
+	m_pControl->Draw(m_2dRenderer);
 
 	/*std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
