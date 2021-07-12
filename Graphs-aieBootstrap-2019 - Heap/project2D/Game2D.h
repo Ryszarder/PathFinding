@@ -8,6 +8,7 @@
 
 //class Player;
 //class Agent;
+//class AgentTwo;
 
 class Game2D : public aie::Game
 {
@@ -27,4 +28,6 @@ protected:
 	Pathfinder* m_pPathfinder;
 	Agent* m_pAgent;
 	Enemy* m_pEnemy;
+
+	//AgentTwo* m_pAI;
 };

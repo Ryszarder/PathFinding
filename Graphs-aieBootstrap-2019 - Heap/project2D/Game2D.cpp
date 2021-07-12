@@ -5,6 +5,7 @@
 #include "Input.h"
 //#include "Player.h"
 //#include "Agent.h"
+//#include "AgentTwo.h"
 
 Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game(title, width, height, fullscreen)
 {
@@ -17,6 +18,8 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	m_pPathfinder = new Pathfinder();
 	m_pAgent = new Agent();
 	m_pEnemy = new Enemy();
+
+	//m_pAI = new AgentTwo(m_pPathfinder, { 200, 200 });
 }
 
 Game2D::~Game2D()
@@ -32,6 +35,8 @@ Game2D::~Game2D()
 	delete m_pAgent;
 
 	delete m_pEnemy;
+
+	//delete m_pAI;
 }
 
 void Game2D::Update(float deltaTime)
@@ -93,6 +98,8 @@ void Game2D::Update(float deltaTime)
 
 		Draw();
 	}
+
+	//m_pAI->Update(deltaTime);
 }
 
 void Game2D::Draw()
@@ -114,6 +121,8 @@ void Game2D::Draw()
 	m_pAgent->Draw(m_2dRenderer);
 
 	m_pEnemy->Draw(m_2dRenderer);
+
+	//m_pAI->Draw(m_2dRenderer);
 
 	/*std::vector<Vector2> path;
 	Vector2 start = { 60, 60 };
