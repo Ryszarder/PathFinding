@@ -104,6 +104,21 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}
 
+	if (input->WasKeyPressed(aie::INPUT_KEY_SPACE))
+	{
+		Vector2 ConPos = m_pControl->GetPos();
+		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
+
+		if (pNode)
+		{
+			pNode->m_bBlocked = true;
+		}
+
+		Draw();
+	}
+
+
+
 	m_pAI->Update(deltaTime);
 
 	m_pControl->Update(deltaTime);

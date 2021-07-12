@@ -35,9 +35,21 @@ void Controller::Update(float DeltaTime)
 	{
 		m_v2Position.x += 20.0f;
 	}
+
+	SetPos(m_v2Position);
 }
 
 void Controller::Draw(aie::Renderer2D* pRenderer)
 {
 	pRenderer->DrawBox(m_v2Position.x, m_v2Position.y, 15, 15);
+}
+
+void Controller::SetPos(Vector2 v2Position)
+{
+	m_v2Position = v2Position;
+}
+
+Vector2 Controller::GetPos()
+{
+	return m_v2Position;
 }

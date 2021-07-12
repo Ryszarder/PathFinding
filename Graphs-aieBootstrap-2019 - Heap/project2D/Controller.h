@@ -14,6 +14,10 @@ public:
 	void Update(float DeltaTime);
 	void Draw(aie::Renderer2D* pRenderer);
 
+	void SetPos(Vector2 v2Position);
+	Vector2 GetPos();
+
+
 private:
 	Pathfinder* m_pPathfinder;
 	std::vector<Vector2> m_vPath;
