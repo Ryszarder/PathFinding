@@ -4,7 +4,7 @@
 #include <vector>
 #include "Heap.h"
 
-#define GRID_SIZE 50
+#define GRID_SIZE 30
 #define NODE_SIZE 20
 #define NODE_DRAW_SIZE 19
 

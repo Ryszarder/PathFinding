@@ -65,24 +65,24 @@ void Game2D::Update(float deltaTime)
 
 	//m_pEnemy->Update(deltaTime);
 
-	//float camPosX;
-	//float camPosY;
+	float camPosX;
+	float camPosY;
 
-	//m_2dRenderer->GetCameraPos(camPosX, camPosY);
+	m_2dRenderer->GetCameraPos(camPosX, camPosY);
 
-	//if (input->IsKeyDown(aie::INPUT_KEY_W))
-	//	camPosY += 500.0f * deltaTime;
+	/*if (input->IsKeyDown(aie::INPUT_KEY_W))
+		camPosY += 500.0f * deltaTime;
 
-	//if (input->IsKeyDown(aie::INPUT_KEY_S))
-	//	camPosY -= 500.0f * deltaTime;
+	if (input->IsKeyDown(aie::INPUT_KEY_S))
+		camPosY -= 500.0f * deltaTime;
 
-	//if (input->IsKeyDown(aie::INPUT_KEY_A))
-	//	camPosX -= 500.0f * deltaTime;
+	if (input->IsKeyDown(aie::INPUT_KEY_A))
+		camPosX -= 500.0f * deltaTime;
 
-	//if (input->IsKeyDown(aie::INPUT_KEY_D))
-	//	camPosX += 500.0f * deltaTime;
+	if (input->IsKeyDown(aie::INPUT_KEY_D))
+		camPosX += 500.0f * deltaTime;*/
 
-	//m_2dRenderer->SetCameraPos(camPosX, camPosY);
+	m_2dRenderer->SetCameraPos(camPosX, camPosY);
 
 	//// Exit the application if escape is pressed.
 	if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))

@@ -333,9 +333,9 @@ void Pathfinder::Render(aie::Renderer2D* pRenderer)
 		}
 	}
 
-	for (int y = 0; y < GRID_SIZE; ++y)
+	for (int y = 1; y < GRID_SIZE; ++y)
 	{
-		for (int x = 0; x < GRID_SIZE; ++x)
+		for (int x = 1; x < GRID_SIZE; ++x)
 		{
 			GraphNode* pNode = m_pNodes[x][y];
 
