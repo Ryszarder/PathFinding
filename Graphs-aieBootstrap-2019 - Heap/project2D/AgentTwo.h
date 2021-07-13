@@ -24,6 +24,6 @@ private:
 	Vector2 m_v2Destination;
 	Vector2 m_v2Velocity;
 	float m_fSpeed;
-	float fMaxSpeed;
+	float m_fMaxSpeed;
 };
 

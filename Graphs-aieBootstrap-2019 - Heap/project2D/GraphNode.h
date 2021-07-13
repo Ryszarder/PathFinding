@@ -20,6 +20,7 @@ struct GraphNode
 	int m_nCosts[NEIGHBOUR_COUNT];
 
 	bool m_bBlocked;
+	bool m_bAttack;
 }; 
 
 

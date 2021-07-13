@@ -23,6 +23,8 @@ Pathfinder::Pathfinder()
 
 			m_pNodes[x][y]->m_bBlocked = false;
 
+			m_pNodes[x][y]->m_bAttack = false;
+
 			/*if (x == 20 && y != 20)
 				m_pNodes[x][y]->m_bBlocked = true;*/
 		}
@@ -209,6 +211,8 @@ bool Pathfinder::AStarPath(Vector2 v2Start, Vector2 v2End, std::vector<Vector2>&
 		return false;
 	if (pEnd->m_bBlocked)
 		return false;
+	if (pEnd->m_bAttack)
+		return false;
 	if (pStart == pEnd)
 	{
 		FinalPath.push_back(pEnd->m_v2Position);
@@ -257,6 +261,8 @@ bool Pathfinder::AStarPath(Vector2 v2Start, Vector2 v2End, std::vector<Vector2>&
 			if (pNeighbour == nullptr)
 				continue;
 			if (pNeighbour->m_bBlocked) //Dont wal through wall
+				continue;
+			if (pNeighbour->m_bAttack) //Dont wal through wall
 				continue;
 			if (m_bClosedList[pNeighbour->m_nIndexX][pNeighbour->m_nIndexY]) //Alread closed
 				continue;
@@ -336,6 +342,8 @@ void Pathfinder::Render(aie::Renderer2D* pRenderer)
 			//Draws node
 			if (pNode->m_bBlocked)
 				pRenderer->SetRenderColour(0.0f, 0.0f, 0.5f); //Blue
+			else if (pNode->m_bAttack)
+				pRenderer->SetRenderColour(0.5f, 0.0f, 0.0f);
 			else
 				pRenderer->SetRenderColour(0.0f, 0.8f, 0.0f, 0.7f); //Green
 

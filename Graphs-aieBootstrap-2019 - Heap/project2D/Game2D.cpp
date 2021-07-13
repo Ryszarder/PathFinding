@@ -117,31 +117,31 @@ void Game2D::Update(float deltaTime)
 		Draw();
 	}
 
-	/*if (input->WasMouseButtonPressed(0))
+	if (input->WasKeyPressed(aie::INPUT_KEY_E))
 	{
 		Vector2 ConPos = m_pControl->GetPos();
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
 
 		if (pNode)
 		{
-			pNode->m_bBlocked = true;
+			pNode->m_bAttack = true;
 		}
 
 		Draw();
 	}
 
-	if (input->WasMouseButtonPressed(0))
+	if (input->WasKeyPressed(aie::INPUT_KEY_Q))
 	{
 		Vector2 ConPos = m_pControl->GetPos();
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
 
 		if (pNode)
 		{
-			pNode->m_bBlocked = true;
+			pNode->m_bAttack = true;
 		}
 
 		Draw();
-	}*/
+	}
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -150,7 +150,7 @@ void Game2D::Update(float deltaTime)
 			Vector2 AgentPos = m_pAI[i]->GetPos();
 			GraphNode* pNode = m_pPathfinder->GetNodeByPos(AgentPos);
 
-			if (pNode->m_bBlocked == true)
+			if (pNode->m_bAttack == true)
 			{
 				m_pAI[i] = nullptr;
 
