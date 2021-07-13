@@ -25,39 +25,6 @@ AgentTwo::~AgentTwo()
 
 void AgentTwo::Update(float deltaTime)
 {
-	aie::Input* input = aie::Input::GetInstance();
-
-	Vector2 v2Mouse;
-	v2Mouse.x = input->GetMouseX();
-	v2Mouse.y = input->GetMouseY();
-
-	//Seek behaviours
-	Vector2 v2Dir = v2Mouse - m_v2Position;
-	v2Dir = v2Dir.get_normalised();
-
-	Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
-	Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
-
-	m_v2Velocity += v2SteeringForce * deltaTime;
-	m_v2Velocity += m_v2Velocity * deltaTime;
-
-	/*m_v2Velocity += v3Dir * m_fSpeed * deltaTime;
-	if (m_v2Velocity.get_magnitude() > 200)
-	{
-		m_v2Velocity = m_v2Velocity.get_normalised();
-		m_v2Velocity = m_v2Velocity * m_fMaxSpeed;
-	}*/
-
-	//Flee Behaviours
-	Vector2 v2Dir = m_v2Position - v2Mouse;
-	v2Dir = v2Dir.get_normalised();
-
-	Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
-	Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
-
-	m_v2Velocity += v2SteeringForce * deltaTime;
-	m_v2Velocity += m_v2Velocity * deltaTime;
-
 	if (m_path.size() < 2)
 	{	
 		m_v2Destination.x = rand() % /*2000*/ (GRID_SIZE * NODE_SIZE);
@@ -120,3 +87,35 @@ Vector2 AgentTwo::GetPos()
 {
 	return m_v2Position;
 }
+
+//aie::Input* input = aie::Input::GetInstance();
+//Vector2 v2Mouse;
+//v2Mouse.x = input->GetMouseX();
+//v2Mouse.y = input->GetMouseY();
+
+////Seek behaviours
+//Vector2 v2Dir = v2Mouse - m_v2Position;
+//v2Dir = v2Dir.get_normalised();
+
+//Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
+//Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
+
+//m_v2Velocity += v2SteeringForce * deltaTime;
+//m_v2Velocity += m_v2Velocity * deltaTime;
+
+///*m_v2Velocity += v3Dir * m_fSpeed * deltaTime;
+//if (m_v2Velocity.get_magnitude() > 200)
+//{
+//	m_v2Velocity = m_v2Velocity.get_normalised();
+//	m_v2Velocity = m_v2Velocity * m_fMaxSpeed;
+//}*/
+
+////Flee Behaviours
+//Vector2 v2Dir = m_v2Position - v2Mouse;
+//v2Dir = v2Dir.get_normalised();
+
+//Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
+//Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
+
+//m_v2Velocity += v2SteeringForce * deltaTime;
+//m_v2Velocity += m_v2Velocity * deltaTime;
