@@ -16,6 +16,8 @@ AgentTwo::AgentTwo(Pathfinder* pPathfinder, Vector2 v2StartPos)
 
 	m_v2Velocity.x = 0;
 	m_v2Velocity.y = 0;
+
+	m_fFood = 1000.0f;
 }
 
 AgentTwo::~AgentTwo()
@@ -25,6 +27,19 @@ AgentTwo::~AgentTwo()
 
 void AgentTwo::Update(float deltaTime)
 {
+	if (m_fFood < 30)
+	{
+		m_v2Destination.x = 20;
+		m_v2Destination.y = 20;
+
+		m_pPathfinder->AStarPath(m_v2Position, m_v2Destination, m_path);
+	}
+
+	if (m_v2Destination.x == 20 && m_v2Destination.y == 20)
+	{
+		m_fFood = 1000.0f;
+	}
+
 	if (m_path.size() < 2)
 	{	
 		m_v2Destination.x = rand() % /*2000*/ (GRID_SIZE * NODE_SIZE);
@@ -63,6 +78,8 @@ void AgentTwo::Update(float deltaTime)
 	}
 
 	SetPos(m_v2Position);
+
+	m_fFood = m_fFood - 1;
 }
 
 void AgentTwo::Draw(aie::Renderer2D* pRenderer)

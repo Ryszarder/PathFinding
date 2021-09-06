@@ -25,5 +25,6 @@ private:
 	Vector2 m_v2Velocity;
 	float m_fSpeed;
 	float m_fMaxSpeed;
+	float m_fFood;
 };
 

@@ -137,7 +137,7 @@ void Game2D::Update(float deltaTime)
 
 		if (pNode)
 		{
-			pNode->m_bAttack = true;
+			pNode->m_bAttack = false;
 		}
 
 		Draw();
