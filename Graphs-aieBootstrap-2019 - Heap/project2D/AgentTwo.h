@@ -8,13 +8,22 @@ class Pathfinder; //foward-declare
 class AgentTwo
 {
 public:
+	//Constructor
 	AgentTwo(Pathfinder* pPathfinder, Vector2 v2StartPos);
+
+	//Destructor
 	~AgentTwo();
 
+	//Update
 	void Update(float deltaTime);
+
+	//Draw
 	void Draw(aie::Renderer2D* pRenderer);
 
+	//Set position
 	void SetPos(Vector2 v2Position);
+
+	//Get position
 	Vector2 GetPos();
 
 private:

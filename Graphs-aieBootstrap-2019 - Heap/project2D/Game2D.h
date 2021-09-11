@@ -3,12 +3,7 @@
 #include "Game.h"
 #include "Renderer2D.h"
 #include "Pathfinder.h"
-//#include "Agent.h"
-//#include "Enemy.h"
 
-//class Player;
-//class Agent;
-//class Enemy;
 class AgentTwo;
 class Controller;
 
@@ -28,8 +23,6 @@ protected:
 	aie::Font*	m_font;
 
 	Pathfinder* m_pPathfinder;
-	//Agent* m_pAgent;
-	//Enemy* m_pEnemy;
 
 	AgentTwo* m_pAI[4];
 

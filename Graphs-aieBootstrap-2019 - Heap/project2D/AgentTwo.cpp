@@ -3,23 +3,33 @@
 #include <math.h>
 #include <Input.h>
 
+//Constructor
 AgentTwo::AgentTwo(Pathfinder* pPathfinder, Vector2 v2StartPos)
 {
+	//Initalise the m_pPathfinder to equal the pathfinder that was passed in
 	m_pPathfinder = pPathfinder;
+
+	//Initalise the m_v2Position to equal the v2StartPos that was passed in
 	m_v2Position = v2StartPos;
 
+	//Initalise m_v2Destination.x and m_v2Sestination.y with a random value 
 	m_v2Destination.x = rand() % /*2000*/ (GRID_SIZE * NODE_SIZE);
 	m_v2Destination.y = rand() % /*2000*/(GRID_SIZE * NODE_SIZE);
 
+	//Initalise m_fSpeed
 	m_fSpeed = 100.0f;
+	//Initalise m_fMaxSpeed
 	m_fMaxSpeed = 200.0f;
 
+	//Initalise m_v2Velocity.x and m_v2Velocity.y to 0
 	m_v2Velocity.x = 0;
 	m_v2Velocity.y = 0;
 
+	//Initalise m_fFood 
 	m_fFood = 1000.0f;
 }
 
+//Destructor
 AgentTwo::~AgentTwo()
 {
 
@@ -104,35 +114,3 @@ Vector2 AgentTwo::GetPos()
 {
 	return m_v2Position;
 }
-
-//aie::Input* input = aie::Input::GetInstance();
-//Vector2 v2Mouse;
-//v2Mouse.x = input->GetMouseX();
-//v2Mouse.y = input->GetMouseY();
-
-////Seek behaviours
-//Vector2 v2Dir = v2Mouse - m_v2Position;
-//v2Dir = v2Dir.get_normalised();
-
-//Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
-//Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
-
-//m_v2Velocity += v2SteeringForce * deltaTime;
-//m_v2Velocity += m_v2Velocity * deltaTime;
-
-///*m_v2Velocity += v3Dir * m_fSpeed * deltaTime;
-//if (m_v2Velocity.get_magnitude() > 200)
-//{
-//	m_v2Velocity = m_v2Velocity.get_normalised();
-//	m_v2Velocity = m_v2Velocity * m_fMaxSpeed;
-//}*/
-
-////Flee Behaviours
-//Vector2 v2Dir = m_v2Position - v2Mouse;
-//v2Dir = v2Dir.get_normalised();
-
-//Vector2 vDesiredVelocity = v2Dir * m_fMaxSpeed;
-//Vector2 v2SteeringForce = m_v2Destination - m_v2Velocity;
-
-//m_v2Velocity += v2SteeringForce * deltaTime;
-//m_v2Velocity += m_v2Velocity * deltaTime;

@@ -3,9 +3,6 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-//#include "Player.h"
-//#include "Agent.h"
-//#include "Enemy.h"
 #include "AgentTwo.h"
 #include "Controller.h"
 
@@ -18,34 +15,34 @@ Game2D::Game2D(const char* title, int width, int height, bool fullscreen) : Game
 	m_font = new aie::Font("./font/consolas.ttf", 24);
 
 	m_pPathfinder = new Pathfinder();
-	//m_pAgent = new Agent();
-	//m_pEnemy = new Enemy();
 
+	//Creates the four agents and initalise them
 	for (int i = 0; i < 4; ++i)
 	{
 		m_pAI[i] = new AgentTwo(m_pPathfinder, { 200, 200 });
 	}
 	
-
+	//Creates the player and initalise it
 	m_pControl = new Controller(m_pPathfinder, { 100, 100 });
 
+	//Variable to keep track of when to close the game when all four agents are gone
 	count = 0;
 }
 
 Game2D::~Game2D()
 {
+	//Delete the player
 	delete m_pControl;
 
+	//Delete all four agents
 	delete m_pAI[0];
 	delete m_pAI[1];
 	delete m_pAI[2];
 	delete m_pAI[3];
 
-	//delete m_pEnemy;
-
-	//delete m_pAgent;
-
+	//Delete the pathfinder
 	delete m_pPathfinder;
+
 	// Delete the renderer.
 	delete m_2dRenderer;
 
@@ -55,34 +52,20 @@ Game2D::~Game2D()
 
 void Game2D::Update(float deltaTime)
 {
+	//If count equals 4
 	if (count == 4)
 	{
+		//Close the game
 		exit(0);
 	}
+
 	// Input example: Update the camera position using the arrow keys.
 	aie::Input* input = aie::Input::GetInstance();
-	//m_pAgent->Update(deltaTime);
-
-	//m_pEnemy->Update(deltaTime);
 
 	float camPosX;
 	float camPosY;
 
 	m_2dRenderer->GetCameraPos(camPosX, camPosY);
-
-	/*if (input->IsKeyDown(aie::INPUT_KEY_W))
-		camPosY += 500.0f * deltaTime;
-
-	if (input->IsKeyDown(aie::INPUT_KEY_S))
-		camPosY -= 500.0f * deltaTime;
-
-	if (input->IsKeyDown(aie::INPUT_KEY_A))
-		camPosX -= 500.0f * deltaTime;
-
-	if (input->IsKeyDown(aie::INPUT_KEY_D))
-		camPosX += 500.0f * deltaTime;*/
-
-	m_2dRenderer->SetCameraPos(camPosX, camPosY);
 
 	//// Exit the application if escape is pressed.
 	if (input->IsKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -91,81 +74,119 @@ void Game2D::Update(float deltaTime)
 		application->Quit();
 	}
 
+	//When left mouse button is click
 	if (input->WasMouseButtonPressed(0))
 	{
+		//Find the mouse position on the game where clicked
 		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+
+		//Get the node clicked on
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
+		//If click on a node
 		if (pNode)
 		{
+			//Set node to blocked creating a blue node that the agent can't move into
 			pNode->m_bBlocked = true;
 		}
 
+		//Draw the new node
 		Draw();
 	}
 
+	//If right mouse button is click
 	if (input->WasMouseButtonPressed(1))
 	{
+		//Find where on the game the mouse position clicked on
 		Vector2 mousePos = { input->GetMouseX(), input->GetMouseY() };
+
+		//Get the node clicked on
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(mousePos);
 
+		//If clicked on a node
 		if (pNode)
 		{
+			//Set blocked to false getting rid of the blue node
 			pNode->m_bBlocked = false;
 		}
 
+		//Draw new node
 		Draw();
 	}
 
+	//If the key E was pressed
 	if (input->WasKeyPressed(aie::INPUT_KEY_E))
 	{
+		//Get the player position when the key is pressed
 		Vector2 ConPos = m_pControl->GetPos();
+
+		//Get the node clicked on
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
 
+		//if clicked on node
 		if (pNode)
 		{
+			//Set Attack true turning into a red node that will delete agent when crossed
 			pNode->m_bAttack = true;
 		}
 
+		//Draw new node
 		Draw();
 	}
 
+	//If key Q was pressed
 	if (input->WasKeyPressed(aie::INPUT_KEY_Q))
 	{
+		//Get the player position when the key is pressed
 		Vector2 ConPos = m_pControl->GetPos();
+
+		//Get the node clicked on
 		GraphNode* pNode = m_pPathfinder->GetNodeByPos(ConPos);
 
+		//If clicked on node
 		if (pNode)
 		{
+			//Set Attack to false turing red back to normal green node
 			pNode->m_bAttack = false;
 		}
 
+		//Draw new node
 		Draw();
 	}
 
+	//For loop to run through all the agents
 	for (int i = 0; i < 4; ++i)
 	{
+		//If agent doesn't equal null 
 		if (m_pAI[i] != nullptr)
 		{
+			//Get agent position on the game
 			Vector2 AgentPos = m_pAI[i]->GetPos();
+
+			//Get the node the agent is on
 			GraphNode* pNode = m_pPathfinder->GetNodeByPos(AgentPos);
 
+			//If the node Attack equals true
 			if (pNode->m_bAttack == true)
 			{
+				//Agent equals null
 				m_pAI[i] = nullptr;
 
+				//Increase the count by 1
 				count++;
 			}
 
 		}
 
+		//If agent doesn't equal null
 		if(m_pAI[i] != nullptr)
 		{
+			//Run the Update function in the agentTwo cpp
 			m_pAI[i]->Update(deltaTime);
-
 		}
 	}
 	
+	//Run the Controll update function
 	m_pControl->Update(deltaTime);
 }
 
@@ -180,36 +201,22 @@ void Game2D::Draw()
 	// Prepare the renderer. This must be called before any sprites are drawn.
 	m_2dRenderer->Begin();
 
+	//Render the pathfinder
 	m_pPathfinder->Render(m_2dRenderer);
-
-	//GraphNode* node = m_pPathfinder->GetNodeByPos({ 33, 33 });
-	//m_2dRenderer->DrawCircle(node->m_v2Position.x, node->m_v2Position.y, 10);
-
-	//m_pAgent->Draw(m_2dRenderer);
-
-	//m_pEnemy->Draw(m_2dRenderer);
-
 	
+	//For loop to run through the agents
 	for (int i = 0; i < 4; ++i)
 	{
+		//If agent doesn't eqaul null
 		if (m_pAI[i] != nullptr)
 		{
+			//Draw the agent
 			m_pAI[i]->Draw(m_2dRenderer);
 		}
 	}
-	
 
+	//Draw the player
 	m_pControl->Draw(m_2dRenderer);
-
-	/*std::vector<Vector2> path;
-	Vector2 start = { 60, 60 };
-	Vector2 end = { 800, 60 };
-	m_pPathfinder->AStarPath(start, end, path);
-
-	for (int i = 0; i < path.size(); ++i)
-	{
-		m_2dRenderer->DrawCircle(path[i].x, path[i].y, 10);
-	}*/
 	
 	// Draw some text.
 	float windowHeight = (float)application->GetWindowHeight();
